@@ -30,7 +30,6 @@ public class Power {
             num=base*num;
         return isNegative?1/num:num;
     }
-
     public static void main(String[] args) {
         double it=  Pow(2,3);
         System.out.println(it);
