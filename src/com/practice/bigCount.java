@@ -8,7 +8,6 @@ package com.practice;
  * @version: 1.0
  */
 public class bigCount {
-
     /**
      * 主要分析n&(n-1)的妙用：
      * 假如二进制n,最后一位是0,就向前借一位2。2-1=1，假如是1，
