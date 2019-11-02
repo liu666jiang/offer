@@ -24,7 +24,65 @@ public class PrintMax {
                 System.out.println();
         }
     }
+
+    public static void  printToMaxOfNDigits_Method2(int n){
+        if (n<0){
+            return;
+        }
+        //初始化字符串为0
+        StringBuilder stringBuilder=new StringBuilder();
+        for (int i=0;i<n;i++){
+            stringBuilder.append("0");
+        }
+        //当数不溢出的时候，自增打印
+        while(!increase(stringBuilder)){
+            print(stringBuilder);
+        }
+    }
+    private static boolean increase(StringBuilder stringBuilder) {
+        //设置溢出标志位
+        boolean isTakeFlow=false;
+        Integer nTakeOver=0;
+        int sLength=stringBuilder.length();
+        for (int i=sLength-1;i>=0;i--){
+            int nSum=stringBuilder.charAt(i)-'0'+nTakeOver;
+            //个位数时加一就行
+            if (i==sLength-1){
+                nSum++;
+            }
+            //满十进一
+            if (nSum>=10){
+                //判断是不是最大位
+                if (i==0){
+                    //溢出
+                    isTakeFlow=true;
+                }else{//不是最大位
+                    nSum=nSum-10;
+                    nTakeOver=1;
+                    stringBuilder.setCharAt(i,(char)('0'+nSum));
+                }
+            }else{
+                stringBuilder.setCharAt(i,(char)('0'+nSum));
+                break;
+            }
+        }
+        return  isTakeFlow;
+    }
+    //打印字符串
+    public static void print(StringBuilder stringBuilder) {
+        boolean isBeginZero = true;
+        for (int i = 0; i < stringBuilder.length(); i++) {
+            if (isBeginZero && stringBuilder.charAt(i) != '0') {
+                isBeginZero = false;
+            }
+            if (!isBeginZero) {
+                System.out.print(stringBuilder.charAt(i));
+            }
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        printToMaxOfNDigits(2);
+        printToMaxOfNDigits_Method2(2);
     }
 }
